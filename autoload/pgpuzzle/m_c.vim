@@ -3,7 +3,7 @@
 " 9 : cannibal
 
 " SEE: plugin/pgpuzzle.vim
-let pgpuzzle#missionaries_and_cannibals#dummy = 1
+let pgpuzzle#m_c#dummy = 1
 
 function! s:combination(ary, is_uniq) abort
   let ret = []
@@ -78,7 +78,9 @@ function! s:start(src, dst, src_to_dst_flg, process) abort
 
     if s:validate(tmp_src, tmp_dst, a:src_to_dst_flg, a:process)
       if s:is_finish(tmp_dst)
+        " show results and break
         call s:print(a:process + [[tmp_src, tmp_dst]])
+        break
       else
         call s:start(tmp_src, tmp_dst, a:src_to_dst_flg ? 0 : 1, a:process + [[tmp_src, tmp_dst, a:src_to_dst_flg ? 0 : 1]])
       endif
@@ -88,6 +90,7 @@ function! s:start(src, dst, src_to_dst_flg, process) abort
   endfor
 endfunction
 
-function! pgpuzzle#missionaries_and_cannibals#start() abort
+" start missionaries and cannibals
+function! pgpuzzle#m_c#start() abort
   call s:start([1, 1, 1, 9, 9, 9], [], 1, [[[1, 1, 1, 9, 9, 9], [], 1]])
 endfunction

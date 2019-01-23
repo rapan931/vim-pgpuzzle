@@ -2,7 +2,7 @@
 "
 " NOTE: Not use list.
 "
-"  111
+"  000
 "  |||
 "  ||+- missionary
 "  |+-- cannibal
@@ -10,7 +10,7 @@
 "
 "  and go to dst(1), or go to src(0) bit
 "
-" example: src[missionary*1 and cannibal*2], dst[missionary*2 and cannibal*1] and go to dst
+" example: src[missionary * 1, and cannibal*2], dst[missionary*2 and cannibal*1] and go to dst
 "   0010100101011011101
 "       |
 "       V
@@ -24,7 +24,7 @@
 "    +------------------------- src missionary(No.3)
 
 " SEE: plugin/pgpuzzle.vim
-let pgpuzzle#missionaries_and_cannibals_num_only#dummy = 1
+let pgpuzzle#m_c_num_only#dummy = 1
 
 function! s:combination(ary, is_uniq) abort
   let ret = []
@@ -32,8 +32,7 @@ function! s:combination(ary, is_uniq) abort
   for s:value in a:ary
     for s:value2 in a:ary[i:-1]
       call add(ret, [s:value, s:value2])
-    endfor
-    let i += 1
+    endfor let i += 1
   endfor
   if a:is_uniq
     return uniq(sort(ret))
@@ -109,6 +108,8 @@ function! s:start(src, dst, src_to_dst_flg, process) abort
   endfor
 endfunction
 
-function! pgpuzzle#missionaries_and_cannibals#start() abort
+function! pgpuzzle#m_c#start() abort
   call s:start([1, 1, 1, 9, 9, 9], [], 1, [[[1, 1, 1, 9, 9, 9], [], 1]])
 endfunction
+
+" vim:set spell
